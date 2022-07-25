@@ -75,10 +75,24 @@ class ABMExtremo{
 
     
     /*  */
-    public function masJugadosExtremo(){
+    public function masJugadosExtremo($n){
         $objExtremo=new Extremo();
         $colJuegos=$objExtremo->juegosMasJugados();
-        return $colJuegos;
+        $tam=count($colJuegos);
+
+        if($n==1){
+            $coleccion=$colJuegos[0];
+        }else if($n>=$tam){
+            $coleccion=$colJuegos;
+        }else{
+            $coleccion=array();
+            for($i=0;$i<$n;$i++){
+                $coleccion[$i]=$colJuegos[$i];
+            }
+        }
+        
+
+        return $coleccion;
     }
 }
 ?>

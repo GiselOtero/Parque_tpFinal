@@ -162,9 +162,26 @@ class ABMJuego{
     public function juegosMasJugados($n){
         $abmJuegoEspecial=new ABMEspecial();
         $abmJuegoExtremo= new ABMExtremo();
-        $colEspecial=$abmJuegoEspecial->masJugadosEspecial();
-        $colExtremo=$abmJuegoExtremo->masJugadosExtremo();
+        $colEspecial=$abmJuegoEspecial->masJugadosEspecial($n);
+        $colExtremo=$abmJuegoExtremo->masJugadosExtremo($n);
+        $colMasJugado['especial']=$colEspecial;
+        $colMasJugado['extremo']=$colExtremo;
         
+
+        return $colMasJugado;
+    }
+
+    public function juegoMasJugadoXtipo($tipo){
+        $abmJuegoEspecial=new ABMEspecial();
+        $abmJuegoExtremo=new ABMExtremo();
+
+        if($tipo==1){
+            $unJuego= $abmJuegoEspecial->masJugadosEspecial(1);
+        }
+        if($tipo==2){
+            $unJuego=$abmJuegoExtremo->masJugadosExtremo(1);
+        }
+        return $unJuego;
     }
     
 
@@ -187,8 +204,10 @@ class ABMJuego{
         if($unJuego->getActivo()==0){
             echo "\nEl juego no se encuentra activo\n";
         }else{
-            $unJuego->jugarJuego();
+            $resp=$unJuego->jugarJuego();
         }
+
+        echo "\n".$resp['motivo'];
     }
 
 }

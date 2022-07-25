@@ -70,10 +70,21 @@ class ABMEspecial{
 
 
     /*  */
-    public function masJugadosEspecial(){
+    public function masJugadosEspecial($n){
         $objEspecial=new Especial();
         $colJuegos=$objEspecial->juegosMasJugados();
-        return $colJuegos;
+        $tam=count($colJuegos);
+        if($n==1){
+            $coleccion=$colJuegos[0];
+        }else if($n>=$tam){
+            $coleccion=$colJuegos;
+        }else{
+            $coleccion=array();
+            for($i=0;$i<$n;$i++){
+                $coleccion[$i]=$colJuegos[$i];
+            }
+        }
+        return $coleccion;
     }
     
 }
