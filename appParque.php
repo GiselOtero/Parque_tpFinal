@@ -791,6 +791,42 @@ function jugar(){
     $abmJuego->iniciarJuego($unPase,$unJuego);
 }
 
+/* function activarJuegos(){
+    echo "\nActivar juego\n";
+    echo "\nIngrese el juego que desea activar\n";
+    
+
+} */
+
+
+function verJuegosMasJugados(){
+    $abmJuego= new ABMJuego();
+    echo "\nVer los juegos mas Jugados\n";
+    echo "\nIngrese el numero de juegos que desea visualizar: ";
+    $n=esNumero();
+
+    $col=$abmJuego->juegosMasJugados($n);
+    foreach($col as $tipoJuego=>$juego){
+        echo "\n Tipo Juego: ".$tipoJuego;
+        foreach($juego as $unElemento){
+            echo "";
+            echo "\n Juego:".$unElemento->getNombreJuego()."\n";
+            echo "\n cantidad personas:".$unElemento->getTotalPersonas()."\n";
+ 
+        }
+    }
+    
+}
+
+function verElJuegoMasJugado(){
+    $abmJuego= new ABMJuego();
+    echo "\nVer el juegos mas Jugado por tipo\n";
+    $tipo=tipoJuego();
+    $juego=$abmJuego->juegoMasJugadoXtipo($tipo);
+    
+    echo "";
+    echo "\n".$juego."\n";
+}
 
 function subMenuIniciarJuego(){
     echo "\n----------------<<Menu Iniciar Juego>>-----------------\n";
@@ -823,15 +859,12 @@ function submenuIniciarJuegoOpcion(){
                 
                 break;
             case 3:
-                
+                verJuegosMasJugados();
                 break;
             case 4:
-               
+                verElJuegoMasJugado();
                 break;
-            case 5:
-               
-                break;
-            /* case 6:
+            /* case 5:
                 break;    */
         }
     }while($opcionIniJuego != 5);

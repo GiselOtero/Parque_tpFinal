@@ -334,28 +334,33 @@ class Juego{
      * Devolvera false si el pase no cumple con las condicines del juego
     */
     public function jugarJuego($unPase){
+        $resp=array();
         $edadPermitida=$this->getEdad();
         $alturaPermitida=$this->getAltura();
         $cantPersonaAct=$this->getCantidadPersonas();
         $maxPermitida=$this->getMaximoPersonas();
         $juegosJugados=$unPase->getCantidadJuegos();
-        $totalpersonas=$this->getTotalPersonas();
+        $totalpersonasAct=$this->getTotalPersonas();
 
-        $resp=true;
+        $resp['juega']=true;
+
 
         if($cantPersonaAct >= $maxPermitida){
-            $resp=false;
+            $resp['juega']=false;
+            $resp['motivo']=" Se excedio el maximo de personas permitidas ";
         }
 
         if($unPase->getVisitante()->getEdad()!=$edadPermitida || $unPase->getVisitante()->getAltura()<$alturaPermitida){
-            $resp=false;   
+            $resp['juega']=false;
+            $resp['motivo']=" No Cumple con la edad o altura permitida. ";
         }
 
-        if($resp){
+        if($resp['juega']){
             $cantPersonaAct++;
             $juegosJugados++;
+            $totalpersonasAct++;
             $this->setCantidadPersonas($cantPersonaAct);
-            $this->setTotalPersonas();
+            $this->setTotalPersonas($totalpersonasAct);
             $unPase->setCantidadJuegos($juegosJugados);
 
             if($cantPersonaAct==$maxPermitida){
@@ -365,7 +370,8 @@ class Juego{
 
             $this->modificar();
             $unPase->modificar();
-            $resp=true;
+            $resp['juega']=true;
+            $resp['motivo']=" puede ingresar al juego ";
         }
         return $resp;
     }
