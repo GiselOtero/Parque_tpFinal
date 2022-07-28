@@ -262,69 +262,7 @@ class Juego{
      * 
      */
 
-    public function BuscarXNombre($nombre){
-        $arreglo=array();
-
-        $base = new BaseDatos();
-        $sql = "SELECT * FROM juego WHERE nombrejuego='".$nombre."'";
-        $resp= false;
-        if($base->Iniciar()){
-            if($base->Ejecutar($sql)){
-                while($row=$base->Registro()){
-                    $objJuego=new Juego();
-
-                    $unParque=new Parque();
-                    $unParque->Buscar($row['parque']);
-
-                    $objJuego->cargar($row['codjuego'],$row['nombrejuego'],$row['cantidadpersonas'],$row['activo'],$row['edad'],$row['altura'],$row['maximopersonas'],$row['totalpersonas'],$unParque);
-
-                    array_push($arreglo,$objJuego);
-                    $resp= true;
-				}	
-            }	else {
-                $this->setmensajeoperacion($base->getError());
-		 		
-			}
-        }	else {
-            $this->setmensajeoperacion($base->getError());
-        }
-        return $arreglo;
-	}
-
-
-    //editar
-    /** 
-     * Busca todos lo juegos activos o no
-     */
-    public function juegosActivos($act){
-        $arreglo=array();
-
-        $base = new BaseDatos();
-        $sql = "SELECT * FROM juego WHERE activo=".$act;
-        $resp= false;
-        if($base->Iniciar()){
-            if($base->Ejecutar($sql)){
-                while($row=$base->Registro()){
-                    
-                    $objJuego=new Juego();
-
-                    $unParque=new Parque();
-                    $unParque->Buscar($row['parque']);
-
-                    $objJuego->cargar($row['codjuego'],$row['nombrejuego'],$row['cantidadpersonas'],$row['activo'],$row['edad'],$row['altura'],$row['maximopersonas'],$row['totalpersonas'],$unParque);
-
-                    array_push($arreglo,$objJuego);
-                    $resp= true;
-				}	
-            }	else {
-                $this->setmensajeoperacion($base->getError());
-		 		
-			}
-        }	else {
-            $this->setmensajeoperacion($base->getError());
-        }
-        return $arreglo;
-	}
+    
     
 
 

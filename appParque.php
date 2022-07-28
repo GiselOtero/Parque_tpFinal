@@ -791,12 +791,14 @@ function jugar(){
     $abmJuego->iniciarJuego($unPase,$unJuego);
 }
 
-/* function activarJuegos(){
+function activarJuego(){
     echo "\nActivar juego\n";
+    $abmJuego=new ABMJuego();
+    $abmJuego->buscarXactivo(0);
     echo "\nIngrese el juego que desea activar\n";
     
 
-} */
+}
 
 
 function verJuegosMasJugados(){
@@ -856,7 +858,7 @@ function submenuIniciarJuegoOpcion(){
                 jugar();
                 break;
             case 2:
-                
+                activarJuego();
                 break;
             case 3:
                 verJuegosMasJugados();

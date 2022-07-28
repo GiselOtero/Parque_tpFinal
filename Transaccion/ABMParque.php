@@ -10,10 +10,10 @@ class ABMParque{
         $objParque=new Parque();
         $colParque=$objParque->listar();
         
-        echo "\n---------------------------------------------\n";
+        echo "\n**********************************\n";
         foreach ($colParque as $unParque){
             echo $unParque;
-            echo "\n---------------------------------------------\n";
+            echo "\n**********************************\n";
         }
     }
 
@@ -36,7 +36,7 @@ class ABMParque{
     /* MODIFICAR */
 
     /**
-     * SOlo modifica razon social ingrtesa por parametro un parque 
+     * Solo modifica razon social ingrtesa por parametro un parque 
      * y muestra por pantalla si se pudo modificar
      */
     public function modificarRazonSocial($objParque,$dato){

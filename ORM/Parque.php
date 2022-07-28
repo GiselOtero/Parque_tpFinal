@@ -56,7 +56,7 @@ class Parque{
     }
 
     public function getColJuego(){
-        if(count($this->getColJuego()==0)){
+        if(count($this->getColJuego())==0){
             $idParque=$this->getIDParque();
             $colJuegos=array();
             $condicion="parque= ".$idParque;
@@ -71,7 +71,7 @@ class Parque{
     }
 
     public function getColPasesEmitidos(){
-        if(count($this->getColPasesEmitidos()==0)){
+        if(count($this->getColPasesEmitidos())==0){
             $idParque=$this->getIDParque();
             $colPases=array();
             $condicion="parque= ".$idParque;

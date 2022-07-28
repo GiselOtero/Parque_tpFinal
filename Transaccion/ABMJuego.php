@@ -6,11 +6,11 @@ class ABMJuego{
         $objJuegos=new Juego();
         $colJuegos=$objJuegos->listar();
        
-       echo "\n---------------------------------------------\n";
+       echo "\n**********************************\n";
        foreach ($colJuegos as $unJuegos){
            
            echo $unJuegos;
-           echo "\n---------------------------------------------\n";
+          echo "\n**********************************\n";
        }
     }
 
@@ -18,11 +18,11 @@ class ABMJuego{
         $objExtremo=new Extremo();
         $colExtremo=$objExtremo->listar();
        
-       echo "\n---------------------------------------------\n";
+      echo "\n**********************************\n";
        foreach ($colExtremo as $unExtremo){
            
            echo $unExtremo;
-           echo "\n---------------------------------------------\n";
+          echo "\n**********************************\n";
        }
     } */
 
@@ -30,11 +30,11 @@ class ABMJuego{
         $objEspecial=new Especial();
         $colEspecial=$objEspecial->listar();
        
-       echo "\n---------------------------------------------\n";
+      echo "\n**********************************\n";
        foreach ($colEspecial as $unEspecial){
            
            echo $unEspecial;
-           echo "\n---------------------------------------------\n";
+          echo "\n**********************************\n";
        }
     } */
 
@@ -191,9 +191,10 @@ class ABMJuego{
         if($tam<=0){
             echo "\nNo se ha encontrado datos almacenados\n";
         }else{
+            echo "\n**********************************\n";
             foreach ($unaColeccion as $unElemento){       
-                echo $unElemento;
-                echo "\n---------------------------------------------\n";
+            echo $unElemento;
+            echo "\n**********************************\n";
             }
         }
     }

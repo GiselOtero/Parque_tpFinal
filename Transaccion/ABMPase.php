@@ -6,12 +6,10 @@ class ABMPase{
         $objPase=new Pase();
         $colPase=$objPase->listar();
        
-       echo "\n---------------------------------------------\n";
+       echo "\n**********************************\n";
        foreach ($colPase as $unPase){
-           /* echo "<br>";//html */
            echo $unPase;
-           /* echo "<br>";//html */
-           echo "\n---------------------------------------------\n";
+           echo "\n**********************************\n";
        }
     }
     /* listar */
@@ -95,31 +93,40 @@ class ABMPase{
 
     public function buscarXFecha($dato){
         $objPase=new Pase();
-        $colPase=$objPase->BuscarXFecha($dato);
+        $condicion= "fechaemision= '".$dato."'";
+        $colPase=$objPase->listar($condicion);
         if(count($colPase)<=0){
             echo "\nNo se ha encontrado datos almacenados\n";
         }else{
-            foreach ($colPase as $unPase){
-                echo $unPase;
-                echo "\n---------------------------------------------\n";
-            }
+            $this->mostrarDatos($colPase);
         }
     }
 
     public function buscarXCantidad($dato){
         $objPase=new Pase();
-        $colPase=$objPase->BuscarXCantJuego($dato);
+        $condicion=" cantidadjuegos=".$dato;
+        $colPase=$objPase->listar($condicion);
         if(count($colPase)<=0){
             echo "\nNo se ha encontrados datos almacenados\n";
         }else{
-            foreach ($colPase as $unPase){
-                echo $unPase;
-                echo "\n---------------------------------------------\n";
-            }
+            
+            $this->mostrarDatos($colPase);
         }
     }
     /* BUSCAR */
 
+    public function mostrarDatos($unaColeccion){
+        $tam=count($unaColeccion);
+        if($tam<=0){
+            echo "\nNo se ha encontrado datos almacenados\n";
+        }else{
+            echo "\n**********************************\n";
+            foreach ($unaColeccion as $unElemento){       
+            echo $unElemento;
+            echo "\n**********************************\n";
+            }
+        }
+    }
     
 }
 ?>

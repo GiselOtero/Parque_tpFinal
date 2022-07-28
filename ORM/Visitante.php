@@ -253,44 +253,7 @@ class Visitante{
 	}
 
 
-    /**
-     * Recupera los datos de un visitante por nomb
-     * @param int $nomb
-     * @return true en caso de encontrar los datos, false en caso contrario
-     */
-    public function BuscarXNombre($nomb){
-        $base = new BaseDatos();
-        $arreglo=array();
-
-        $sql = "SELECT * FROM visitante WHERE nombre='".$nomb."' ";
-        
-        $resp= false;
-        if($base->Iniciar()){
-            if($base->Ejecutar($sql)){
-                while($row=$base->Registro()){
-                    
-                    $objVisitante= new Visitante();
-
-                    $objVisitante->cargar($row['idvisitante'],$row['nombre'],$row['apellido'],$row['fechanacimiento'],$row['edad'],$row['altura'],$row['tipodoc'],$row['nrodoc']);
-                    /* $this->setIDVisitante($row['idvisitante']);
-                    $this->setNombre($row['nombre']);
-                    $this->setApellido($row['apellido']);
-                    $this->setFechaNacimiento($row['fechanacimiento']);
-                    $this->setEdad($row['edad']);
-                    $this->setAltura($row['altura']);
-                    $this->setTipoDoc($row['tipodoc']);
-                    $this->setNroDoc($row['nrodoc']); */
-                    $resp= true;
-                    array_push($arreglo,$objVisitante);
-                }
-            }else {
-                $this->setmensajeoperacion($base->getError());
-            }
-        }else {
-            $this->setmensajeoperacion($base->getError());
-        }
-        return $arreglo;
-	}
+    
 
 
     /* calcula edad */

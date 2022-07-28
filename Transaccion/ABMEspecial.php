@@ -4,11 +4,11 @@ class ABMEspecial{
         $objEspecial=new Especial();
         $colEspecial=$objEspecial->listar();
        
-       echo "\n---------------------------------------------\n";
+       echo "\n**********************************\n";
        foreach ($colEspecial as $unEspecial){
            
            echo $unEspecial;
-           echo "\n---------------------------------------------\n";
+           echo "\n**********************************\n";
        }
     }
 
@@ -24,7 +24,17 @@ class ABMEspecial{
     /* ALTA */
 
     /* MODIFICAR */
-
+    public function modificar($objJuego,$datos){
+        $objJuego->setNombreJuego($datos['nombre']);
+        $objJuego->setEdad($datos['edad']);
+        $objJuego->setAltura($datos['altura']);
+        $objJuego->setMaximoPersonas($datos['max']);
+        if($objJuego->modificar()){
+            echo "\nLos datos fueron modificados correctamente\n";
+        }else{
+            echo "\nHubo un error al modificar los datos\n";
+        }
+    }
     /* MODIFICAR */
 
 

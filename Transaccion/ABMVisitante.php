@@ -5,11 +5,11 @@ class ABMVisitante{
         $objVisitante=new Visitante();
         $colVisitante=$objVisitante->listar();
        
-       echo "\n---------------------------------------------\n";
+       echo "\n**********************************\n";
        foreach ($colVisitante as $unVisitante){
            
            echo $unVisitante;
-           echo "\n---------------------------------------------\n";
+           echo "\n**********************************\n";
        }
     }
     
@@ -68,17 +68,12 @@ class ABMVisitante{
 
     public function buscarXNombre($nombre){
         $objVisitante=new Visitante();
-        
-        $colVisitanteNom=$objVisitante->buscarXNombre($nombre);
+        $condicion=" nombre='".$nombre."' ";
+        $colVisitanteNom=$objVisitante->listar($condicion);
         if(count($colVisitanteNom)<=0){
             echo "\nNo se ha encontrado datos almacenados\n";
         }else{
-            echo "\n---------------------------------------------\n";
-            foreach ($colVisitanteNom as $unVisitante){
-                
-                echo $unVisitante;
-                echo "\n---------------------------------------------\n";
-            }
+            $this->mostrarDatos($colVisitanteNom);
         }
     }
     /* public function existeDni($dni){
@@ -88,5 +83,18 @@ class ABMVisitante{
             
         return $encontrado;
     } */
+
+    public function mostrarDatos($unaColeccion){
+        $tam=count($unaColeccion);
+        if($tam<=0){
+            echo "\nNo se ha encontrado datos almacenados\n";
+        }else{
+            echo "\n**********************************\n";
+            foreach ($unaColeccion as $unElemento){       
+            echo $unElemento;
+            echo "\n**********************************\n";
+            }
+        }
+}
 }
 ?>

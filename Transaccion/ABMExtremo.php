@@ -4,11 +4,11 @@ class ABMExtremo{
         $objExtremo=new Extremo();
         $colExtremo=$objExtremo->listar();
        
-       echo "\n---------------------------------------------\n";
+       echo "\n**********************************\n";
        foreach ($colExtremo as $unExtremo){
            
            echo $unExtremo;
-           echo "\n---------------------------------------------\n";
+           echo "\n**********************************\n";
        }
     }
 
