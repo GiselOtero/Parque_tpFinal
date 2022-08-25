@@ -113,6 +113,12 @@ class ABMJuego{
 
 
 
+    /**
+     * Busca el juego por tipo(Extremo, Especial) segun el codigo
+     * @param int $tipo,$cod
+     * @return $unJuego
+     * 
+     */
     public function buscarXcodigo($tipo,$cod){
         $abmJuegoEspecial=new ABMEspecial();
         $abmJuegoExtremo=new ABMExtremo();
@@ -126,6 +132,11 @@ class ABMJuego{
         return $unJuego;
     }
 
+    /**
+     * Busca el juego por tipo(Extremo, Especial) segun el nombre
+     * @param int $tipo, string $nombreJuego
+     * 
+     */
     public function buscarXNombre($tipo,$nombreJuego){
         $abmJuegoEspecial=new ABMEspecial();
         $abmJuegoExtremo=new ABMExtremo();
@@ -142,6 +153,11 @@ class ABMJuego{
         //return $colJuego;
     }
 
+    /**
+     * Busca el juego por tipo(Extremo, Especial) segun si esta activo o no
+     * @param int $tipo,$esActivo
+     * 
+     */
     public function buscarXactivo($tipo,$esActivo){
         $abmJuegoEspecial=new ABMEspecial();
         $abmJuegoExtremo=new ABMExtremo();
@@ -159,6 +175,9 @@ class ABMJuego{
     }
 
 
+    /**
+     * 
+     */
     public function juegosMasJugados($n){
         $abmJuegoEspecial=new ABMEspecial();
         $abmJuegoExtremo= new ABMExtremo();
@@ -186,6 +205,10 @@ class ABMJuego{
     
 
 
+    /**
+     * Muestra por pantalla la colección ingresada por parámetros
+     * @param array $unaColeccion
+     */
     public function mostrarDatos($unaColeccion){
         $tam=count($unaColeccion);
         if($tam<=0){
@@ -201,15 +224,32 @@ class ABMJuego{
 
 
 
+    /**
+     * 
+     */
     public function iniciarJuego($unPase,$unJuego){
         if($unJuego->getActivo()==0){
             echo "\nEl juego no se encuentra activo\n";
         }else{
-            $resp=$unJuego->jugarJuego();
+            $resp=$unJuego->jugarJuego($unPase);
+            echo "\n".$resp['motivo'];
         }
 
-        echo "\n".$resp['motivo'];
     }
 
+
+    public function activarJuego($unJuego){
+        if($unJuego->getActivo()==1){
+            echo "\nEl juego ya se encuentra activo\n";
+        }else{
+            $resp=$unJuego->activar();
+        }
+
+        if($resp){
+            echo  "\nEl juego se activo correctamente\n";
+        }else{
+            echo  "\nEl juego no se activo correctamente\n";
+        }
+    }
 }
 ?>

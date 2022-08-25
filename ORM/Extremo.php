@@ -11,6 +11,12 @@ class Extremo extends Juego{
     }
 
 
+    /**
+     * Recupera los datos de un visitante por su codigo
+     * @param int $cod
+     * @return true en caso de encontrar los datos, false en caso contrario
+     */
+
     public function Buscar($cod){
         $base = new BaseDatos();
         $sql = "SELECT * FROM extremo WHERE codjuego=".$cod;
@@ -31,6 +37,14 @@ class Extremo extends Juego{
         return $resp;
     }
 
+
+    /**
+     * Retorna un array con los juegos que cumplan con una condición, en
+     * caso de no tener condición retorna todos los juegos que se encuentran
+     * almacenados en la base de datos
+     * @param string $condicion
+     * @return array
+    */
     public function listar($condicion=""){
         $arreglo=array();
         $base= new BaseDatos();
@@ -56,6 +70,13 @@ class Extremo extends Juego{
         return $arreglo;
     }
 
+
+    /**
+     * Inserta un Juego en la base de datos,
+     * retorna true si el dato se insertó correctamente, false en caso contrario
+     * @param
+     * @return boolean $resp
+     */
     public function insertar(){
         $base = new BaseDatos();
         $resp= false;
@@ -80,6 +101,12 @@ class Extremo extends Juego{
     }
 
     
+    /**
+     * Elimina un Juego almacenado en la base de datos,
+     * retorna true si el dato se eliminó correctamente false en caso contrario
+     * @return boolean $resp
+     */
+
     public function eliminar(){
         $base =new BaseDatos();
         $resp =false;
@@ -103,6 +130,11 @@ class Extremo extends Juego{
     }
 
 
+    /**
+     * Si el pase es con aptitud se le permite jugar
+     * retorna un array 
+     * @return array $resp 
+     */
     public function jugarJuego($unPase){
         $resp=array();
         if($unPase->getConAptitud()==1){
@@ -119,6 +151,11 @@ class Extremo extends Juego{
         return parent::burbuja($coljuegos,$num);
     }
 
+    /**
+     * Obtiene la lista de todos los juegos y los ordena según el total de personas que jugaron
+     * @param  
+     * @return array $listaJuego
+     */
     public function juegosMasJugados(){
         $objExtremo=new Extremo();
         $coljuegos=$objExtremo->listar();
@@ -126,6 +163,9 @@ class Extremo extends Juego{
         $listaJuego=$objExtremo->burbuja($coljuegos,$tam);
         return $listaJuego;
     }
+    
+
+
     
     public function juegosActivos($act){
         $arreglo=array();
@@ -145,6 +185,8 @@ class Extremo extends Juego{
         return $arreglo;
     }
 
-    
+    public function activarJuego(){
+        return parent::activarJuego();
+    }
 }
 ?>

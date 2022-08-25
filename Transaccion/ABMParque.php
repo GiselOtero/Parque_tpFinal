@@ -38,6 +38,7 @@ class ABMParque{
     /**
      * Solo modifica razon social ingrtesa por parametro un parque 
      * y muestra por pantalla si se pudo modificar
+     * @param $objParque, string $dato
      */
     public function modificarRazonSocial($objParque,$dato){
 
@@ -58,11 +59,20 @@ class ABMParque{
      * Elimina de la base de datos el parque que es ingresado por parametro
      */
     Public function bajaParque($objParque){
-        $resp=$objParque->eliminar();
-        if($resp){
-            echo "\nse elimino correctamente\n";
+
+        $colJuegos=$objParque->getColJuego();
+        $colPases=$objParque->getColPasesEmitidos();
+
+        if(count($colJuegos)>=0 || count($colPases)>=0){
+            echo "\nNo se puede eliminar el Parque: ".$objParque->getNombre()." ya que tiene más datos asociados a este\n";
         }else{
-            echo "\nEl parque no se elimino correctamente\n";
+
+            $resp=$objParque->eliminar();
+            if($resp){
+                echo "\nse elimino correctamente\n";
+            }else{
+                echo "\nEl parque no se elimino correctamente\n";
+            }
         }
 
     }

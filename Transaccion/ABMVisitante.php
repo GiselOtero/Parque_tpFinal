@@ -1,6 +1,11 @@
 <?php
 class ABMVisitante{
 
+
+    /**
+     * Muestra la lista completa de todos los visitantes
+     * 
+     */
     public function listarVisitante(){
         $objVisitante=new Visitante();
         $colVisitante=$objVisitante->listar();
@@ -17,20 +22,29 @@ class ABMVisitante{
     //crea un nuevo visitante
     public function alta($datos){ 
         $unVisitante= new Visitante();
-        $edad=$unVisitante->calcularEdad($datos['fechaNac']);
-        echo "edad ".$edad;
-        $unVisitante->cargar(1,$datos['nombre'],$datos['apellido'],$datos['fechaNac'],$edad,$datos['altura'],$datos['tipodoc'],$datos['nrodoc']);
 
-        if($unVisitante->insertar()){
-            echo "\nLos datos fueron cargados correctamente\n";
+        if($this->buscarXDni($datos['nrodoc'])!=null){
+            echo "\nEl numero de Dni ya esta almacenado en la base de datos\n";
         }else{
-            echo "\nHubo un error al cargar los datos\n";
+
+            $edad=$unVisitante->calcularEdad($datos['fechaNac']);
+            //echo "edad ".$edad;
+            $unVisitante->cargar(1,$datos['nombre'],$datos['apellido'],$datos['fechaNac'],$edad,$datos['altura'],$datos['tipodoc'],$datos['nrodoc']);
+            if($unVisitante->insertar()){
+                echo "\nLos datos fueron cargados correctamente\n";
+            }else{
+                echo "\nHubo un error al cargar los datos\n";
+            }
+            
         }
     }
     /* ALTA */
 
 
     /* MODIFICAR */
+    /**
+     * Modifica Nombre y apellido del visitante
+     */
     public function modificarNombreApellido($objVisitante,$datos){
         $objVisitante->setNombre($datos['nombre']);
         $objVisitante->setApellido($datos['apellido']);
@@ -55,6 +69,10 @@ class ABMVisitante{
     /* BAJA */
 
 
+    /**
+     * Busca un visitante por número de dni retorna si existe el visitante en la base de datos 
+     * retorna el objeto, en caso contrario devuelve nulo. 
+     */
     public function buscarXDni($dni){
         $objVisitante=new Visitante();
         
@@ -84,6 +102,11 @@ class ABMVisitante{
         return $encontrado;
     } */
 
+
+    /**
+     * Muestra por pantalla la colección ingresada por parámetros
+     * @param array $unaColeccion
+     */
     public function mostrarDatos($unaColeccion){
         $tam=count($unaColeccion);
         if($tam<=0){
@@ -95,6 +118,6 @@ class ABMVisitante{
             echo "\n**********************************\n";
             }
         }
-}
+    }
 }
 ?>

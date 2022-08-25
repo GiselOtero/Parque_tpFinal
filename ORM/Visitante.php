@@ -100,7 +100,7 @@ class Visitante{
 
 
     /**
-     * Recupera los datos de un visitante por id?
+     * Recupera los datos de un visitante por su id
      * @param int $id
      * @return true en caso de encontrar los datos, false en caso contrario
      */
@@ -130,6 +130,12 @@ class Visitante{
         return $resp;
 	}
 
+    /**
+     * Retorna un array con los visitantes que cumplan con una condición, en caso de no tener condición 
+     * retorna todos los visitantes que se encuentran almacenados en la base de datos
+     * @param string $condicion
+     * @return array
+    */
     public static function listar($condicion=""){
         $arreglo = null;
         $base=new BaseDatos();
@@ -156,6 +162,13 @@ class Visitante{
         return $arreglo;
     }
 
+
+    /**
+     * Inserta un visitante en la base de datos,
+     * retorna true si el dato se insertó correctamente, false en caso contrario
+     * @param 
+     * @return boolean $resp
+     */
     public function insertar(){
         $base=new BaseDatos();
         $resp= false;
@@ -177,6 +190,12 @@ class Visitante{
     }
 
 
+    /**
+     * Modifica un dato de un Visitante, 
+     * retorna true si el dato se modificó correctamente false en caso contrario
+     * @param 
+     * @return boolean $resp
+     */
     public function modificar(){
 	    $resp =false; 
 	    $base=new BaseDatos();
@@ -193,6 +212,11 @@ class Visitante{
 		return $resp;
     }
 
+    /**
+     * Elimina un Visitante almacenado en la base de datos, 
+     * retorna true si el dato se eliminó correctamente false en caso contrario
+     * @return boolean $resp
+     */
     public function eliminar(){
         $base =new BaseDatos();
         $resp =false;
@@ -210,7 +234,10 @@ class Visitante{
         return $resp; 
 	}
 
-
+    /**
+     * Retorna un String con la información de visitante
+     * @return string
+     */
     public function __toString(){
         return "\nNombre: ".$this->getNombre()."\nApellido: ".$this->getApellido()."\nFechaNacimiento: ".$this->getFechaNacimiento()."\nEdad: ".$this->getEdad()."\nAltura: ".$this->getAltura()."\nTipo documento: ".$this->getTipoDoc()."\nNro doc: ".$this->getNroDoc()."\n";
     }
@@ -263,9 +290,16 @@ class Visitante{
         $edad = $fechaAct->diff($fechaNac);
     } */
 
+    /**
+     * Calcula la edad según la fecha de nacimiento ingresada por parámetro
+     * retornando la edad
+     * @param $fecha
+     * @return int $edad 
+     */
     public function calcularEdad($fecha){
         $fechaNac= new DateTime($fecha);
         $fechaAct= new DateTime();
+        // diff(fecha) Devuelve la diferencia entre dos objetos DateTime
         $edad = $fechaNac->diff($fechaAct);
         return $edad->format('%y');
     }

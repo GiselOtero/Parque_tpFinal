@@ -68,6 +68,14 @@ class ABMEspecial{
         return $colBuscar;
     }
 
+
+    /**
+     * 
+     * Busca los juegos segun si estan activos o no
+     * retorna un array
+     * @param int $activo
+     * @return array $colBuscar;
+     */
     public function buscarXactivo($activo){
         $objEspecial=new Especial();
         $condicion=" activo=".$activo;

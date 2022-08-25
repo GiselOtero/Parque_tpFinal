@@ -49,8 +49,10 @@ function esNumero(){
 function verificarFecha($mes,$dia,$anio){
     $resp=false;
     
-    if(checkdate($mes,$dia,$anio)){
-        $resp=true;
+    if($anio>1900){
+        if(checkdate($mes,$dia,$anio)){
+            $resp=true;
+        }
     }
     return $resp;
 }
@@ -533,6 +535,8 @@ function IngresarDatosVisitante(){
 
     //echo "\nIngrese nrodoc:  ";
     $datos['nrodoc']=verificarDni();
+
+
     echo "\nIngrese fecha de Nacimiento: \n";
     $datos['fechaNac']=ingresarFecha();
 
@@ -782,7 +786,7 @@ function jugar(){
     $abmJuego=new ABMJuego();
 
     echo "\nJugar un juego\n";
-    echo "\nIngrese el Pase\n";
+    echo "\nIngrese el Pase del visitante\n";
     $unPase=verificarPase();
 
     echo "\nIngrese el juego que desea subir\n";
@@ -794,8 +798,11 @@ function jugar(){
 function activarJuego(){
     echo "\nActivar juego\n";
     $abmJuego=new ABMJuego();
-    $abmJuego->buscarXactivo(0);
+    $tipoJuego=tipoJuego();
+    $abmJuego->buscarXactivo($tipoJuego,0);
     echo "\nIngrese el juego que desea activar\n";
+    $unJuego=verificarJuego();
+    $abmJuego->activarJuego($unJuego);
     
 
 }
@@ -809,11 +816,11 @@ function verJuegosMasJugados(){
 
     $col=$abmJuego->juegosMasJugados($n);
     foreach($col as $tipoJuego=>$juego){
-        echo "\n Tipo Juego: ".$tipoJuego;
+        echo "\n-------Tipo Juego: ".$tipoJuego."--------\n";
         foreach($juego as $unElemento){
-            echo "";
             echo "\n Juego:".$unElemento->getNombreJuego()."\n";
             echo "\n cantidad personas:".$unElemento->getTotalPersonas()."\n";
+            echo "\n**********************************\n";
  
         }
     }

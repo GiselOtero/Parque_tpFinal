@@ -15,6 +15,11 @@ class Especial extends Juego{
     }
 
    
+    /**
+     * Recupera los datos de un Juego por su cod
+     * @param int $cod
+     * @return true en caso de encontrar los datos, false en caso contrario
+     */
 
     public function Buscar($cod){
         $base = new BaseDatos();
@@ -36,6 +41,13 @@ class Especial extends Juego{
         return $resp;
     }
 
+
+    /**
+     * Retorna un array con los juegoa especiales que cumplan con una condición, en
+     * caso de no tener condición retorna todos los juegoa especiales que se encuentran almacenados en la base de datos
+     * @param string $condicion
+     * @return array $arreglo
+    */
     public function listar($condicion=""){
         $arreglo=array();
         $base= new BaseDatos();
@@ -61,6 +73,14 @@ class Especial extends Juego{
         return $arreglo;
     }
 
+
+    /**
+     * Inserta un Juego especial en la base de datos,
+     * retorna true si el dato se insertó correctamente, false en caso contrario
+     * @param
+     * @return boolean $resp
+     */
+
     public function insertar(){
         $base = new BaseDatos();
         $resp= false;
@@ -85,6 +105,12 @@ class Especial extends Juego{
     }
 
 
+    /**
+     * Elimina un juego especial almacenado en la base de datos,
+     * retorna true si el dato se eliminó correctamente false en caso contrario
+     * @return boolean $resp
+     */
+
     public function eliminar(){
         $base =new BaseDatos();
         $resp =false;
@@ -105,6 +131,10 @@ class Especial extends Juego{
 
     
 
+    /**
+     * Retorna un String con la información de juego especial
+     * @return string
+     */
     public function __toString(){
         return "\nJuego Especial: ".parent::__toString();
     }
@@ -118,6 +148,11 @@ class Especial extends Juego{
         return parent::burbuja($coljuegos,$num);
     }
 
+    /**
+     * Obtiene la lista de todos los juegos y los ordena según el total de personas que jugaron
+     * @param  
+     * @return array $listaJuego
+     */
     public function juegosMasJugados(){
         $objespecial=new Especial();
         $coljuegos=$objespecial->listar();
@@ -145,6 +180,14 @@ class Especial extends Juego{
         return $arreglo;
     }
 
+
+    /**
+     * Recupera los datos de un Juego especial por su Nombre
+     * retorna todos los juegps con el nombre ingresado
+     * @param string $nom
+     * @return array 
+     */
+
     public function buscarXNombre($nom){
         $arreglo=array();
 
@@ -161,6 +204,11 @@ class Especial extends Juego{
             }
         }
         return $arreglo;
+    }
+
+
+    public function activarJuego(){
+        return parent::activarJuego();
     }
 }
 ?>

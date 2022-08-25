@@ -120,6 +120,14 @@ class Pase{
 	}
 
 
+    /**
+     * Retorna un array con los Pases que cumplan con una condición, en
+     * caso de no tener condición retorna todos los Pases que se encuentran
+     * almacenados en la base de datos
+     * @param string $condicion
+     * @return array $arreglo
+    */
+
     public static function listar($condicion=""){
         $arreglo = null;
 		$base=new BaseDatos();
@@ -154,6 +162,13 @@ class Pase{
         return $arreglo;
     }
 
+    /**
+     * Inserta un Pase en la base de datos,
+     * retorna true si el dato se insertó correctamente, false en caso contrario
+     * @param 
+     * @return boolean $resp
+     */
+
     public function insertar(){
 		$base=new BaseDatos();
 		$resp= false;
@@ -177,6 +192,13 @@ class Pase{
 		return $resp;
 	}
 
+    /**
+     * Modifica un dato de un Pase,
+     * retorna true si el dato se modificó correctamente false en caso contrario
+     * @param
+     * @return boolean $resp
+     */
+
     public function modificar(){
 	    $resp =false; 
 	    $base=new BaseDatos();
@@ -194,6 +216,13 @@ class Pase{
 		}
 		return $resp;
 	}
+
+
+    /**
+     * Elimina un Pase almacenado en la base de datos,
+     * retorna true si el dato se eliminó correctamente false en caso contrario
+     * @return boolean $resp
+     */
 
     public function eliminar(){
 		$base =new BaseDatos();
@@ -213,6 +242,10 @@ class Pase{
 		return $resp; 
 	}
 
+    /**
+     * Retorna un String con la información de un Pase
+     * @return string
+     */
     public function __toString(){
         if($this->esConAptitud()){
             $resp=" true ";
@@ -224,7 +257,10 @@ class Pase{
     }
 
     
-    /* esConAptitud() devuelve true si el pase es 1 o false si es cero */
+    /** 
+     * esConAptitud() devuelve true si el pase es 1 o false si es cero
+     * @return boolean $resp
+     */
     public function esConAptitud(){
         $resp=false;
         if($this->getConAptitud()==1){

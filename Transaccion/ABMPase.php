@@ -82,6 +82,11 @@ class ABMPase{
     } */
 
 
+    /**
+     * Busca un Pase por ID, si existe el Pase en la base de datos retorna el objeto, en caso contrario devuelve nulo. 
+     * @param int $id
+     * @return $objPase
+     */
     public function buscarXID($id){
         $objPase=new Pase();
         $encontrado=$objPase->Buscar($id);
@@ -91,6 +96,9 @@ class ABMPase{
         return $objPase;
     }
 
+    /**
+     * Busca los Pases según su fecha de emisión, en caso de no existir ningún pase con esa fecha  muestra por pantalla que el dato no fue encontrado
+     */
     public function buscarXFecha($dato){
         $objPase=new Pase();
         $condicion= "fechaemision= '".$dato."'";
@@ -102,6 +110,11 @@ class ABMPase{
         }
     }
 
+    /**
+     * Busca los Pases según la cantidad de juegos, 
+     * en caso de no existir ningún pase con esa cantidad  muestra por pantalla que el dato no fue encontrado,
+     * 
+     */
     public function buscarXCantidad($dato){
         $objPase=new Pase();
         $condicion=" cantidadjuegos=".$dato;
@@ -115,6 +128,10 @@ class ABMPase{
     }
     /* BUSCAR */
 
+    /**
+     * Muestra por pantalla la colección ingresada por parámetros
+     * @param array $unaColeccion
+     */
     public function mostrarDatos($unaColeccion){
         $tam=count($unaColeccion);
         if($tam<=0){

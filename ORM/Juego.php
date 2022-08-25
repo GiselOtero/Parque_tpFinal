@@ -145,6 +145,14 @@ class Juego{
         return $resp;
 	}
 
+
+    /**
+     * Retorna un array con los Juegos que cumplan con una condición, en
+     * caso de no tener condición retorna todos los Juegos que se encuentran
+     * almacenados en la base de datos
+     * @param string $condicion
+     * @return array $arreglo
+    */
     public function listar($condicion=""){
         $arreglo = null;
 		$base=new BaseDatos();
@@ -176,6 +184,12 @@ class Juego{
     }
 
 
+    /**
+     * Inserta un Juego en la base de datos,
+     * retorna true si el dato se insertó correctamente, false en caso contrario
+     * @param
+     * @return boolean $resp
+     */
     public function insertar(){
 		$base= new BaseDatos();
 		$resp= false;
@@ -200,6 +214,12 @@ class Juego{
 		return $resp;
 	}
 
+    /**
+     * Modifica un dato de un Juego,
+     * retorna true si el dato se modificó correctamente false en caso contrario
+     * @param
+     * @return boolean $resp
+     */
     public function modificar(){
 	    $resp =false; 
 	    $base=new BaseDatos();
@@ -218,6 +238,11 @@ class Juego{
 		return $resp;
 	}
 
+    /**
+     * Elimina un Juego almacenado en la base de datos,
+     * retorna true si el dato se eliminó correctamente false en caso contrario
+     * @return boolean $resp
+     */
     public function eliminar(){
 		$base =new BaseDatos();
 		$resp =false;
@@ -236,7 +261,10 @@ class Juego{
 		return $resp; 
 	}
 
-
+    /**
+     * Retorna un String con la información de Juego
+     * @return string
+     */
     public function __toString(){
         if($this->esActivo()){
             $resp=" Activo ";
@@ -262,14 +290,14 @@ class Juego{
      * 
      */
 
-    
-    
-
-
+     
     /**
-     * JugarJuego() @param $unPase @return $resp
-     * cada vez que un pase ingresa se incrementa la cantidad de personas que juegan hasta llegar al maximo permitido.
-     * Devolvera false si el pase no cumple con las condicines del juego
+     * JugarJuego() cada vez que un pase ingresa se incrementa la cantidad de personas que juegan hasta llegar al máximo permitido.
+     * Devolverá false si el pase no cumple con las condiciones del juego con el error
+     * 
+     * @param $unPase 
+     * @return array $resp
+     * 
     */
     public function jugarJuego($unPase){
         $resp=array();
@@ -318,11 +346,13 @@ class Juego{
     /**
      * ActivarJuego() activa nuevamente el juego reiniciando tambien cantidadPersonas
      * Activo 1 es igual a true;
+     * @return boolean $resp
     */
     public function activarJuego(){
         $this->setActivo(1);
         $this->setCantidadPersonas(0);
-        $this->modificar();
+        $resp=$this->modificar();
+        return $resp;
     }
 
 
@@ -330,6 +360,9 @@ class Juego{
 
     /**
      * ordena una lista de juegos de mayor a menor segun el total de personas
+     * por el metodo burbuja
+     * @param array $colJuego, int $num (tamaño de la coleccion)
+     * @return array $colJuego
     */
     function burbuja($colJuego,$num){
 
@@ -347,7 +380,9 @@ class Juego{
     }
 
     /**
-     * @param $n @return array 
+     * Obtiene la lista de todos los juegos y los ordena según el total de personas que jugaron
+     * @param  
+     * @return array $listaJuego
      */
     public function juegosMasJugados(){
         $objJuego=new Juego();

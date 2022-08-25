@@ -56,31 +56,21 @@ class Parque{
     }
 
     public function getColJuego(){
-        if(count($this->getColJuego())==0){
-            $idParque=$this->getIDParque();
-            $colJuegos=array();
-            $condicion="parque= ".$idParque;
-            $objJuego=new Juego();
-            $colJuegos=$objJuego->listar($condicion);
-            $this->setColJuego($colJuegos);
-        }
-        return $this->colJuego;
+
+        $idParque=$this->getIDParque();
+        $colJuego=$this->recuperarJuegos($idParque);
+        $this->setColJuego($colJuego);
+        return $colJuego;
     }
     public function setColJuego($valor){
         $this->colJuego=$valor;
     }
 
     public function getColPasesEmitidos(){
-        if(count($this->getColPasesEmitidos())==0){
-            $idParque=$this->getIDParque();
-            $colPases=array();
-            $condicion="parque= ".$idParque;
-            $objPase= new Pase();
-            $colPases=$objPase->listar($condicion);
-            $this->setColPasesEmitidos($colPases);
-        }
-
-        return $this->colPasesEmitidos;
+        $idParque=$this->getIDParque();
+        $colPases=$this->recuperarPases($idParque);
+        $this->setColPasesEmitidos($colPases);
+        return $colPases;
     }
     public function setColPasesEmitidos($valor){
         $this->colPasesEmitidos=$valor;
@@ -123,6 +113,13 @@ class Parque{
         return $resp;
 	}
 
+    /**
+     * Retorna un array con los Parques que cumplan con una condición, en
+     * caso de no tener condición retorna todos los Parques que se encuentran
+     * almacenados en la base de datos
+     * @param string $condicion
+     * @return array
+    */
     public static function listar($condicion=""){
         $arreglo = null;
 		$base=new BaseDatos();
@@ -149,6 +146,14 @@ class Parque{
         return $arreglo;
     }
 
+    
+    /**
+     * Inserta un Parque en la base de datos,
+     * retorna true si el dato se insertó correctamente, false en caso contrario
+     * @param
+     * @return boolean $resp
+     */
+
     public function insertar(){
 		$base=new BaseDatos();
 		$resp= false;
@@ -173,6 +178,12 @@ class Parque{
 		return $resp;
 	}
 
+    /**
+     * Modifica un dato de un Parque,
+     * retorna true si el dato se modificó correctamente false en caso contrario
+     * @param
+     * @return boolean $resp
+     */
     public function modificar(){
 	    $resp =false; 
 	    $base=new BaseDatos();
@@ -190,6 +201,12 @@ class Parque{
 		}
 		return $resp;
 	}
+
+    /**
+     * Elimina un Parque almacenado en la base de datos,
+     * retorna true si el dato se eliminó correctamente false en caso contrario
+     * @return boolean $resp
+     */
 
     public function eliminar(){
 		$base = new BaseDatos();
@@ -209,6 +226,18 @@ class Parque{
 	}
 
 
+    /**
+     * Retorna un String con la información de visitante
+     * @return string
+     */
+    public function __toString(){
+        return "\nID: ".$this->getIDParque()."\n Nombre: ".$this->getNombre()."\n Razon Social: ".$this->getRazonSocial()." \n Domicilio: ".$this->getDomicilio()."\n";
+        /* ."\n Coleccion de Juegos: \n".$this->getColJuego."\n Coleccion de Pases Emitidos: \n".$this->getColPasesEmitidos()."\n" */
+    }
+
+
+    
+
     public function crearColeccion(){
         $idParque=$this->getIDParque();
 
@@ -222,19 +251,23 @@ class Parque{
         $condicion="parque= ".$idParque;
         $objJuego=new Juego();
         $objJuego->listar($condicion);
-
-        
     }
 
-
-    public function __toString(){
-        return "\nID: ".$this->getIDParque()."\n Nombre: ".$this->getNombre()."\n Razon Social: ".$this->getRazonSocial()." \n Domicilio: ".$this->getDomicilio()."\n";
-        /* ."\n Coleccion de Juegos: \n".$this->getColJuego."\n Coleccion de Pases Emitidos: \n".$this->getColPasesEmitidos()."\n" */
+    public function recuperarJuegos($idParque){
+        $colJuegos=array();
+        $idParque=$this->getIDParque();
+        $condicion="parque= ".$idParque;
+        $objJuego=new Juego();
+        $colJuegos=$objJuego->listar($condicion);
+        return $colJuegos;
     }
 
-
-    public function agregarColeccion(){
-
+    public function recuperarPases($idParque){
+        $colPases=array();
+        $condicion="parque= ".$idParque;
+        $objPase=new Pase();
+        $colPases=$objPase->listar($condicion);
+        return $colPases;
     }
 }
 ?>
